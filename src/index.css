@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    /* 60 / 30 / 10 rule
+      60% = neutral base (clean white)
+      30% = sky-blue tint (secondary)
+      10% = warm accent glow (accent)
+    */
+    --site-60: #F8FAFC;
+    --site-30-top: #EEF6FF;
+    --site-30-bottom: #EFF6FF;
+    --site-10: #F5C542;
+
+    /* Background "glow" opacities */
+    --site-30-glow: 0.22;
+    --site-10-glow: 0.14;
+
+    /* MORE WHITE option (swap these values if you prefer whiter pages)
+      --site-bg-base: #F8FAFC;
+      --site-bg-top: #F9FBFF;
+      --site-bg-mid: #F8FAFC;
+      --site-bg-bottom: #F9FAFB;
+    */
+  }
+  
+  body {
+    /* Site-wide background (60/30/10)
+      Layer 1: 30% sky glow
+      Layer 2: 10% accent glow
+      Layer 3: base gradient (neutral with sky tint)
+    */
+    background-color: var(--site-60);
+    background-image:
+      radial-gradient(900px circle at 12% 8%, rgba(28, 167, 236, var(--site-30-glow)), transparent 62%),
+      radial-gradient(700px circle at 88% 0%, rgba(245, 197, 66, var(--site-10-glow)), transparent 58%),
+      linear-gradient(180deg, var(--site-30-top) 0%, var(--site-60) 58%, var(--site-30-bottom) 100%);
+    background-attachment: fixed;
+
+    @apply text-slate-900 antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent text-primary-dark;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-400 rounded-full border-4 border-slate-100;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-500;
+}

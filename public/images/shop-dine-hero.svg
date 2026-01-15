@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="900" viewBox="0 0 1920 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="0.55" stop-color="#0b2a4a"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="70%" cy="20%" r="55%">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="25%" cy="75%" r="60%">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <rect width="1920" height="900" fill="url(#g)"/>
+  <rect width="1920" height="900" fill="url(#grid)" opacity="0.55"/>
+
+  <circle cx="1380" cy="170" r="420" fill="url(#glow1)" filter="url(#blur)"/>
+  <circle cx="520" cy="700" r="520" fill="url(#glow2)" filter="url(#blur)"/>
+
+  <!-- Decorative food icons (very subtle) -->
+  <g opacity="0.28" fill="#e2e8f0">
+    <!-- cup -->
+    <g transform="translate(1420 450) scale(1.1)" filter="url(#soft)">
+      <rect x="-90" y="-70" width="180" height="170" rx="38" fill="#0b1220" opacity="0.35"/>
+      <path d="M-42 -10h84v55c0 50-40 90-90 90S-138 95-138 45v-55h96z" transform="translate(96 0)" fill="#f8fafc" opacity="0.45"/>
+      <path d="M58 18c55 0 85 30 85 70s-30 70-85 70" fill="none" stroke="#f8fafc" stroke-width="18" stroke-linecap="round" opacity="0.35"/>
+      <path d="M-35 -68c-14 18-14 38 0 56" stroke="#fff" stroke-opacity="0.25" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <path d="M10 -74c-14 18-14 38 0 56" stroke="#fff" stroke-opacity="0.20" stroke-width="10" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <!-- burger -->
+    <g transform="translate(1270 640) scale(1.05)" filter="url(#soft)">
+      <path d="M-170 -25c0-95 75-160 170-160s170 65 170 160" fill="#f8fafc" opacity="0.28"/>
+      <path d="M-155 5c20-20 40 0 60-16 20-16 38 8 58-8 20-14 43 12 63-4 20-16 38 8 58-6 20-14 38 6 55 0v28H-155z" fill="#f8fafc" opacity="0.22"/>
+      <rect x="-155" y="35" width="310" height="56" rx="28" fill="#f8fafc" opacity="0.26"/>
+      <path d="M-155 110h310c0 55-58 95-155 95S-155 165-155 110z" fill="#f8fafc" opacity="0.22"/>
+    </g>
+
+    <!-- shopping bag -->
+    <g transform="translate(1540 210) scale(1.05)" filter="url(#soft)">
+      <rect x="-120" y="-60" width="240" height="260" rx="44" fill="#f8fafc" opacity="0.18"/>
+      <path d="M-65 -60c0-55 42-95 95-95s95 40 95 95" fill="none" stroke="#f8fafc" stroke-width="18" opacity="0.18"/>
+      <path d="M-65 35h0" stroke="#f8fafc" stroke-width="18" opacity="0.18"/>
+      <path d="M65 35h0" stroke="#f8fafc" stroke-width="18" opacity="0.18"/>
+    </g>
+  </g>
+
+  <!-- Bottom wave -->
+  <path d="M0 740c220 70 420 80 620 38 230-48 420-160 680-140 260 20 410 120 620 210v52H0z" fill="#0b1220" opacity="0.55"/>
+</svg>
