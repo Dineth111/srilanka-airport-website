@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Plane } from 'lucide-react';
+import { Plane, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Container from '../ui/Container';
 
@@ -16,73 +16,16 @@ function NavItem({ to, end, children, ...props }) {
     <Link
       to={to}
       className={classNames(
-        'text-sm font-extrabold px-4 py-2.5 rounded-xl transition-colors',
+        'px-4 py-2 font-semibold text-base transition-all duration-150 border-b-2',
         isActive
-          ? 'text-blue-600 bg-white shadow-sm'
-          : 'text-slate-700 hover:text-blue-600 hover:bg-white/70'
+          ? 'border-blue-600 text-blue-700 bg-blue-50'
+          : 'border-transparent text-slate-700 hover:text-blue-600 hover:border-blue-300 bg-white'
       )}
+      style={{ margin: '0 0.5rem', borderRadius: '0.5rem 0.5rem 0 0' }}
       {...props}
     >
       {children}
     </Link>
-  );
-}
-
-function Dropdown({ label, items }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    function onDocClick(e) {
-      if (!ref.current) return;
-      if (!ref.current.contains(e.target)) setOpen(false);
-    }
-    document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
-  }, []);
-
-  return (
-    <div className="relative group" ref={ref} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <button
-        type="button"
-        className={classNames(
-          'text-sm font-extrabold px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-1.5',
-          open
-            ? 'text-blue-600 bg-white shadow-sm'
-            : 'text-slate-700 hover:text-blue-600 hover:bg-white/70'
-        )}
-      >
-        {label}
-        <ChevronDown className={classNames('h-4 w-4 transition-transform duration-300', open && 'rotate-180')} />
-      </button>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute left-0 mt-2 w-72 rounded-2xl border border-blue-100 bg-blue-50/95 backdrop-blur-xl shadow-2xl p-2 z-50 overflow-hidden"
-          >
-            {items.map((it) => (
-              <Link
-                key={it.to}
-                to={it.to}
-                className="block px-4 py-3 rounded-xl hover:bg-blue-50 transition-colors group/item"
-                onClick={() => setOpen(false)}
-              >
-                <div className="font-bold text-slate-800 group-hover/item:text-blue-600 transition-colors flex items-center justify-between">
-                  {it.label}
-                  <ChevronDown className="-rotate-90 w-4 h-4 opacity-0 group-hover:item:opacity-100 transition-all -translate-x-2 group-hover:item:translate-x-0 text-blue-600" />
-                </div>
-                {it.description ? <div className="text-xs text-slate-500 font-medium mt-1 leading-snug">{it.description}</div> : null}
-              </Link>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
   );
 }
 
@@ -101,56 +44,116 @@ export default function Navbar() {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  const flightItems = useMemo(
-    () => [
-      { to: '/flights?tab=arrivals', label: 'Arrivals', description: 'Live flight arrival times and status' },
-      { to: '/flights?tab=departures', label: 'Departures', description: 'Departure schedules and gate info' },
-      { to: '/airlines', label: 'Airlines', description: 'Airlines operating at BIA' },
-    ],
-    []
-  );
+  const allNavItems = [
+    { to: '/', label: 'Home' },
+    { to: '/flights', label: 'Flights' },
+    { to: '/airports', label: 'Terminals' },
+    { to: '/shop-dine', label: 'Shop & Dine' },
+    { to: '/services', label: 'Services' },
+    { to: '/transport', label: 'Transport' },
+    { to: '/parking', label: 'Parking' },
+    { to: '/news', label: 'News' },
+    { to: '/passenger-guide', label: 'Guide' },
+    { to: '/accessibility', label: 'Accessibility' },
+    { to: '/travel-requirements', label: 'Travel Requirements' },
+    { to: '/airport-map', label: 'Airport Map' },
+    { to: '/faq', label: 'FAQ' },
+    { to: '/lost-found', label: 'Lost & Found' },
+    { to: '/about', label: 'About' },
+    { to: '/privacy', label: 'Privacy' },
+    { to: '/terms', label: 'Terms' },
+    { to: '/contact', label: 'Contact' },
+  ];
+
+  // Important nav items
+  const mainNavItems = [
+    { to: '/', label: 'Home' },
+    { to: '/flights', label: 'Flights' },
+    { to: '/airports', label: 'Terminals' },
+    { to: '/shop-dine', label: 'Shop & Dine' },
+    { to: '/services', label: 'Services' },
+    { to: '/transport', label: 'Transport' },
+    { to: '/parking', label: 'Parking' },
+    { to: '/news', label: 'News' },
+    { to: '/passenger-guide', label: 'Guide' },
+  ];
+  // Extra nav items for dropdown
+  const moreNavItems = [
+    { to: '/accessibility', label: 'Accessibility' },
+    { to: '/travel-requirements', label: 'Travel Requirements' },
+    { to: '/airport-map', label: 'Airport Map' },
+    { to: '/faq', label: 'FAQ' },
+    { to: '/lost-found', label: 'Lost & Found' },
+    { to: '/about', label: 'About' },
+    { to: '/privacy', label: 'Privacy' },
+    { to: '/terms', label: 'Terms' },
+    { to: '/contact', label: 'Contact' },
+  ];
+  const [showMore, setShowMore] = useState(false);
 
   return (
     <>
-      {/* Fixed header */}
+      {/* Top horizontal navbar */}
       <motion.header
         className={
-          'fixed top-0 left-0 right-0 z-50 ' +
-          'border-b border-blue-200/70 ' +
-          (scrolled
-            ? 'bg-gradient-to-b from-blue-50/95 via-white/90 to-white/85 backdrop-blur-xl shadow-xl shadow-slate-900/10'
-            : 'bg-gradient-to-b from-blue-50/85 via-white/75 to-white/70 backdrop-blur-xl shadow-lg shadow-slate-900/5')
+          'fixed top-0 left-0 right-0 z-50 w-full max-w-full ' +
+          'border-b border-blue-200/40 shadow-2xl backdrop-blur-xl bg-white/80'
         }
+        style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)' }}
       >
         <Container>
-          <div className="h-16 flex items-center justify-between">
+          <div className="h-16 flex items-center justify-between gap-2">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 to-emerald-600 text-white flex items-center justify-center font-bold shadow-lg shadow-blue-600/30 transition-transform group-hover:scale-105">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-6 h-6">
-                  <path d="M22 2L2 22M22 2L15 22M22 2L2 15" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-              <div className="leading-tight">
-                <div className="text-base font-bold text-slate-900 tracking-tight">BIA AIRPORT</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold group-hover:text-blue-600 transition-colors">Official Portal</div>
-              </div>
-            </Link>
+            <div className="flex items-center gap-2 min-w-[180px]">
+              <Link to="/" className="flex items-center gap-2 group">
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 to-emerald-600 text-white flex items-center justify-center font-bold shadow-lg shadow-blue-600/30 transition-transform group-hover:scale-105">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-6 h-6">
+                    <path d="M22 2L2 22M22 2L15 22M22 2L2 15" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div className="leading-tight">
+                  <div className="text-base font-bold text-slate-900 tracking-tight">BIA AIRPORT</div>
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold group-hover:text-blue-600 transition-colors">Official Portal</div>
+                </div>
+              </Link>
+            </div>
 
-            {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center bg-white/60 p-1.5 rounded-2xl border border-blue-200/70 shadow-sm">
-              <NavItem to="/" end>Home</NavItem>
-              <div className="w-px h-4 bg-blue-200 mx-1" />
-              <Dropdown label="Flights" items={flightItems} />
-              <NavItem to="/passenger-guide">Guide</NavItem>
-              <NavItem to="/transport">Transport</NavItem>
-              <NavItem to="/parking">Parking</NavItem>
-              <NavItem to="/services">Services</NavItem>
-              <NavItem to="/airports">Terminals</NavItem>
+            {/* Center: Navbar items, evenly spaced */}
+            <nav className="hidden lg:flex items-center justify-center flex-1 gap-1 bg-transparent p-2 relative" style={{ backdropFilter: 'blur(8px)' }}>
+              {mainNavItems.map((item) => (
+                <NavItem key={item.to} to={item.to} style={{ minWidth: '100px', textAlign: 'center', borderRadius: '1rem', padding: '0.75rem 1.25rem' }}>{item.label}</NavItem>
+              ))}
+              <div className="relative">
+                <button
+                  type="button"
+                  className="px-4 py-2 font-semibold text-base transition-all duration-150 border-b-2 border-transparent text-slate-700 hover:text-blue-600 hover:border-blue-300 bg-white rounded-xl ml-1"
+                  style={{ minWidth: '100px', textAlign: 'center', borderRadius: '1rem', padding: '0.75rem 1.25rem' }}
+                  onClick={() => setShowMore((v) => !v)}
+                >
+                  More
+                </button>
+                {showMore && (
+                  <div className="absolute left-0 mt-2 w-48 rounded-xl bg-white/95 shadow-xl border border-slate-200 z-50">
+                    <ul className="py-2">
+                      {moreNavItems.map((item) => (
+                        <li key={item.to}>
+                          <Link
+                            to={item.to}
+                            className="block px-4 py-2 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg"
+                            onClick={() => setShowMore(false)}
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </nav>
 
             {/* Right Actions */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2">
               <Link
                 to="/flights"
                 className="p-2.5 rounded-xl text-slate-600 hover:bg-white hover:text-blue-600 transition-colors"
@@ -179,37 +182,8 @@ export default function Navbar() {
           </div>
         </Container>
       </motion.header>
-
-      {/* Spacer */}
+      {/* Spacer for content */}
       <div className="h-16" aria-hidden="true" />
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="lg:hidden fixed left-0 right-0 top-16 z-40 bg-blue-50/95 backdrop-blur-xl border-b border-blue-200 shadow-2xl overflow-hidden"
-          >
-            <Container className="py-5 space-y-2">
-              <NavItem to="/" end>Home</NavItem>
-              <div className="px-4 py-2 text-xs font-bold text-slate-400 uppercase tracking-wider mt-4">Flight Information</div>
-              <Link to="/flights?tab=arrivals" className="block px-4 py-3 text-sm font-bold text-slate-700 hover:bg-blue-50 rounded-xl">Arrivals</Link>
-              <Link to="/flights?tab=departures" className="block px-4 py-3 text-sm font-bold text-slate-700 hover:bg-blue-50 rounded-xl">Departures</Link>
-              <Link to="/airlines" className="block px-4 py-3 text-sm font-bold text-slate-700 hover:bg-blue-50 rounded-xl">Airlines</Link>
-              
-              <div className="h-px bg-slate-100 my-4" />
-              <NavItem to="/passenger-guide">Passenger Guide</NavItem>
-              <NavItem to="/transport">Transport</NavItem>
-              <NavItem to="/parking">Parking</NavItem>
-              <NavItem to="/services">Services</NavItem>
-              <NavItem to="/airports">Terminals</NavItem>
-              <NavItem to="/contact">Contact Support</NavItem>
-            </Container>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

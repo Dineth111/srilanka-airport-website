@@ -41,8 +41,13 @@ export default function Footer() {
                 <div className="text-white font-semibold">Explore</div>
                 <ul className="mt-4 space-y-2 text-sm">
                   <li><Link to="/" className="text-slate-300 hover:text-white">Home</Link></li>
+                  <li><Link to="/about" className="text-slate-300 hover:text-white">About</Link></li>
                   <li><Link to="/airlines" className="text-slate-300 hover:text-white">Airlines</Link></li>
                   <li><Link to="/services" className="text-slate-300 hover:text-white">Services</Link></li>
+                  <li><Link to="/shop-dine" className="text-slate-300 hover:text-white">Shop &amp; Dine</Link></li>
+                  <li><Link to="/airport-map" className="text-slate-300 hover:text-white">Airport Map</Link></li>
+                  <li><Link to="/travel-requirements" className="text-slate-300 hover:text-white">Travel Requirements</Link></li>
+                   <li><Link to="/news" className="text-slate-300 hover:text-white">News</Link></li>
                 </ul>
               </div>
               <div>
@@ -50,6 +55,9 @@ export default function Footer() {
                 <ul className="mt-4 space-y-2 text-sm">
                   <li><Link to="/flights" className="text-slate-300 hover:text-white">Flights</Link></li>
                   <li><Link to="/passenger-guide" className="text-slate-300 hover:text-white">Passenger Guide</Link></li>
+                  <li><Link to="/faq" className="text-slate-300 hover:text-white">FAQ</Link></li>
+                  <li><Link to="/lost-found" className="text-slate-300 hover:text-white">Lost &amp; Found</Link></li>
+                  <li><Link to="/accessibility" className="text-slate-300 hover:text-white">Accessibility</Link></li>
                   <li><Link to="/transport" className="text-slate-300 hover:text-white">Transport</Link></li>
                   <li><Link to="/parking" className="text-slate-300 hover:text-white">Parking</Link></li>
                   <li><Link to="/airports" className="text-slate-300 hover:text-white">Terminals</Link></li>
@@ -90,6 +98,10 @@ export default function Footer() {
 
           <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
             <div className="text-xs text-slate-500">© {new Date().getFullYear()} BIA Airport. All rights reserved.</div>
+            <div className="flex items-center gap-4 text-xs">
+              <Link to="/privacy" className="text-slate-500 hover:text-white">Privacy</Link>
+              <Link to="/terms" className="text-slate-500 hover:text-white">Terms</Link>
+            </div>
           </div>
         </Container>
       </div>

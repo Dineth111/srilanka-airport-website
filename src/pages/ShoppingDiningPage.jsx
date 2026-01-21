@@ -47,7 +47,7 @@ export default function ShoppingDiningPage() {
     <PageTransition>
       {/* Hero Section */}
       <div className="relative h-[46vh] min-h-[380px] bg-slate-950 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(/images/shop-dine-hero.svg)` }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${require('../constants/images').IMAGES.COMMON.HEADER_BG})` }} />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/55 to-slate-950/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90" />
 
@@ -70,81 +70,6 @@ export default function ShoppingDiningPage() {
 
       <Container className="py-14 pb-28 lg:pb-20">
 
-        {/* Filter Bar */}
-        <div className="sticky top-20 lg:top-[124px] z-30 -mt-10 mb-10">
-          <div className="bg-white/75 backdrop-blur-xl border border-slate-200 shadow-xl rounded-3xl p-4">
-            <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-primary/10 text-primary rounded-2xl">
-                  <ShoppingBag className="w-6 h-6" />
-                </div>
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Marketplace</h2>
-                  <p className="text-slate-500 text-sm">
-                    Showing <span className="font-extrabold text-slate-700">{filtered.length}</span> item{filtered.length === 1 ? '' : 's'}
-                    {category !== 'All' ? <span className="text-slate-400"> • {category}</span> : null}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 flex-wrap">
-                <div className="relative flex-1 min-w-[220px]">
-                  <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
-                  <input
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search items, vendor, category..."
-                    className="h-11 w-full rounded-xl bg-white border border-slate-200 pl-10 pr-4 font-bold text-sm text-slate-700 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                  />
-                </div>
-
-                <Button to="/shop-dine/cart" variant="outline" className="rounded-xl h-11">
-                  <ShoppingCart className="w-4 h-4" /> Cart ({cart.count})
-                </Button>
-
-                {showClear ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setQuery('');
-                      setCategory('All');
-                    }}
-                    className="h-11 px-4 rounded-xl border border-slate-200 bg-white text-slate-700 font-extrabold text-sm hover:bg-slate-50 transition-colors inline-flex items-center gap-2"
-                  >
-                    <X className="w-4 h-4" /> Clear
-                  </button>
-                ) : null}
-              </div>
-            </div>
-
-            {/* Category chips */}
-            <div className="mt-4 flex items-center gap-2 overflow-x-auto pb-1">
-              <div className="flex items-center gap-2">
-                {SHOP_DINE_CATEGORIES.map((c) => {
-                  const active = c === category;
-                  return (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setCategory(c)}
-                      className={
-                        'h-9 px-4 rounded-full text-sm font-extrabold whitespace-nowrap border transition-colors ' +
-                        (active
-                          ? 'bg-slate-900 text-white border-slate-900'
-                          : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50')
-                      }
-                    >
-                      {c}
-                    </button>
-                  );
-                })}
-              </div>
-              <div className="ml-auto hidden sm:flex items-center gap-2 text-xs font-bold text-slate-500">
-                <Filter className="w-4 h-4" /> Use filters to narrow results
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Products */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

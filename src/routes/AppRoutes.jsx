@@ -15,7 +15,20 @@ import TransportPage from '../pages/TransportPage';
 import TransportBookingPage from '../pages/TransportBookingPage';
 import ParkingPage from '../pages/ParkingPage';
 import ParkingBookingPage from '../pages/ParkingBookingPage';
+import ShoppingDiningPage from '../pages/ShoppingDiningPage';
+import ShopDineCartPage from '../pages/ShopDineCartPage';
+import ShopDineCheckoutPage from '../pages/ShopDineCheckoutPage';
+import ShopDineOrderSuccessPage from '../pages/ShopDineOrderSuccessPage';
+import AboutPage from '../pages/AboutPage';
+import FAQPage from '../pages/FAQPage';
+import LostFoundPage from '../pages/LostFoundPage';
+import AccessibilityPage from '../pages/AccessibilityPage';
+import AirportMapPage from '../pages/AirportMapPage';
+import TravelRequirementsPage from '../pages/TravelRequirementsPage';
+import PrivacyPolicyPage from '../pages/PrivacyPolicyPage';
+import TermsPage from '../pages/TermsPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import NewsPage from '../pages/NewsPage';
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -35,7 +48,20 @@ export default function AppRoutes() {
           <Route path="/transport/book/:mode" element={<TransportBookingPage />} />
           <Route path="/parking" element={<ParkingPage />} />
           <Route path="/parking/book/:zone" element={<ParkingBookingPage />} />
+          <Route path="/shop-dine" element={<ShoppingDiningPage />} />
+          <Route path="/shop-dine/cart" element={<ShopDineCartPage />} />
+          <Route path="/shop-dine/checkout" element={<ShopDineCheckoutPage />} />
+          <Route path="/shop-dine/order-success" element={<ShopDineOrderSuccessPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/lost-found" element={<LostFoundPage />} />
+          <Route path="/accessibility" element={<AccessibilityPage />} />
+          <Route path="/airport-map" element={<AirportMapPage />} />
+          <Route path="/travel-requirements" element={<TravelRequirementsPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/news" element={<NewsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
